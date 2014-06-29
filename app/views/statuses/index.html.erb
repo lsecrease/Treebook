@@ -1,10 +1,12 @@
-<h1>Listing statuses</h1>
-
-<table>
+<div class="page-header">
+<h1>All of the Statuses</h1>
+</div>
+<button type="button" class="btn btn-success"><%= link_to 'Post a New Status', new_status_path %></button>
+<table class="table">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Content</th>
+      <th><h2>Name</h2></th>
+      <th><h2>Content</h2></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,11 +14,14 @@
   <tbody>
     <% @statuses.each do |status| %>
       <tr>
-        <td><%= status.name %></td>
-        <td><%= status.content %></td>
-        <td><%= link_to 'Show', status %></td>
-        <td><%= link_to 'Edit', edit_status_path(status) %></td>
-        <td><%= link_to 'Destroy', status, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><strong><%= status.name %></strong></td>
+        <td><p><%=link_to status.content , status %></p></td>
+        <div class="btn-group">
+          <td><%= link_to time_ago_in_words(status.created_at)  +  " ago" , status %></td>
+          <span class="admin">
+        <td><button type="button" class="btn btn-info"><%= link_to 'Edit', edit_status_path(status) %></button></td>
+          <td><button type="button" class="btn btn-danger"><%= link_to 'Delete', status, method: :delete, data: { confirm: 'Are you sure?' } %></button></td>
+          </span>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +29,4 @@
 
 <br>
 
-<%= link_to 'New Status', new_status_path %>
+
